@@ -176,7 +176,7 @@ class NavRepTrainEnv(CrowdSim2):
             #relative_pos = np.array([0,0])
             obs['spatial_edges'][i] = relative_pos
         obs['lidar'] = self.lidar_scan
-        #print("AAAAAAAAAAAAAAAAAAAAAAAAAAAA", np.shape(obs['spatial_edges'])[0])
+
         return obs
 
     def _update_dist_travelled(self):
