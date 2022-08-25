@@ -292,7 +292,7 @@ class NavRepTrainEnv(CrowdSim2):
                     time.time(),
                 ]
 
-        #print("MMMMMMMMMMMMMMMMMMMMMMMMM", obs, reward, done, {'event': info})
+
         return obs, reward, done, info
 
     def reset(self):
@@ -504,7 +504,7 @@ class NavRepTrainEnv(CrowdSim2):
         config_dir = resource_filename('crowd_nav', 'configs')
         config_file = os.path.join(config_dir, 'test_soadrl_static.config')
         config_file = os.path.expanduser(config_file)
-        #print("AAAAAAA", config_file)
+
         config = configparser.RawConfigParser()
         config.read(config_file)
 
