@@ -5,7 +5,7 @@ import numpy as np
 from pytorchBaselines.a2c_ppo_acktr.utils import init
 from pytorchBaselines.a2c_ppo_acktr.vae1d import Conv1DVAE, reset_graph
 import os
-# MODIFIED LINES ARE 6-7, 356, 360, 364, 443-445
+raw_lidar = True # use True for raw LIDAR, False for compressed LIDAR
 LIDAR_SIZE_RAW = 1080
 LIDAR_SIZE_COM = 32
 MAX_LIDAR_DIST = 25.0
@@ -382,7 +382,7 @@ class SRNN(nn.Module):
         # Load autoencoder (V)
         reset_graph()
         self.vae = Conv1DVAE(LIDAR_SIZE_COM)
-        vae_model_path = os.path.expanduser("~/navrep/models/V/navreptrainvae1d.json")
+        vae_model_path = os.path.expanduser("~/navrep/navreptrainvae1d.json")
         self.vae.load_json(vae_model_path)
 
 
@@ -453,15 +453,15 @@ class SRNN(nn.Module):
         scans = inputs['lidar']
         obs = torch.clamp(scans/ MAX_LIDAR_DIST, 0.0, MAX_LIDAR_DIST)
         obs = obs.reshape(-1, LIDAR_SIZE_RAW, 1)
-        obs_com = self.vae.encode(obs.cpu())
-        #print(obs_com)
-        obs_com = torch.from_numpy(obs_com)
-        obs_com = torch.reshape(obs_com, (x.size(0), x.size(1), LIDAR_SIZE_COM))
-        obs_com = obs_com.cuda()
-        # obs_com = torch.reshape(inputs['lidar'], (x.size(0), x.size(1), LIDAR_SIZE_RAW))
+        if raw_lidar:
+            obs_com = torch.reshape(inputs['lidar'], (x.size(0), x.size(1), LIDAR_SIZE_RAW))
+        else:
+            obs_com = self.vae.encode(obs.cpu())
+            obs_com = torch.from_numpy(obs_com)
+            obs_com = torch.reshape(obs_com, (x.size(0), x.size(1), LIDAR_SIZE_COM))
+            obs_com = obs_com.cuda()
 
         # x is the output of the robot node and will be sent to actor and critic
-        #print("AAAAAAAAAAAAAAAAAA", x.size(), inputs['lidar'].size())
         x_mod = torch.cat((x, obs_com), axis=2)
         hidden_critic = self.critic(x_mod)
         hidden_actor = self.actor(x_mod)
