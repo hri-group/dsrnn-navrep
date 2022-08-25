@@ -19,15 +19,22 @@ pip install -e .
 ## Getting started
 This repository is organized in three parts:
 
-`crowd_sim/` folder contains the simulation environment. Details of the simulation framework can be found here.
+`crowd_sim/` folder contains the simulation environment.
+
 `crowd_nav/` folder contains configurations and non-neural network policies
+
 `pytorchBaselines/` contains the code for the DSRNN network and ppo algorithm.
+
 `a/` folder contains all the functions/classes used for [navreptrainenv.py](crowd_sim/envs/navreptrainenv.py) <- the file containing the NavRep training environment
+
 Please try not to modify the `a/` folder without first understanding how it affects the NavRep training environment.
 
 Because the code is a mashup of two different repositories, there are some odd quirks when running the code-
+
 There are two different files containing the configs for the code
+
 `a/crowd_nav/config/test_soadrl_static.config` <- used for modifying the NavRep training environment EXCLUSIVELY (e.g. no. pedestrians, robot FOV, etc.)
+
 `crowd_nav/configs/config.py` <- used for modifying the training/testing stage itself (e.g. no. training steps, whether to visualise training or not, etc.)
 
 
