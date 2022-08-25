@@ -41,3 +41,13 @@ Please modify the test arguments in the begining of test.py.
 ```python test.py ```
 3. Plot training curve.
 ```python plot.py ```
+
+## Additional info
+[mod_srnn_model.py](pytorchBaselines/a2c_ppo_acktr/mod_srnn_model.py), you can change LiDAR settings to include the auto-encoder or not
+- There is a flag to modify near the beginning of the file, please change that to change LiDAR settings
+
+Also in order to use the autoencoder, you need to have the autoencoder in the folder: "~/navrep/navreptrainvae1d.json" or modify this in the file manually.
+
+
+
+This is a lot of info, please feel free to contact me for any additional help directly (marteekim@gmail.com).
