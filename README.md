@@ -34,11 +34,10 @@ Please try not to modify the `a/` folder without first understanding how it affe
 
 
 ## Running code
-Train a policy.
+1. Train a policy.
 ```python train.py ```
-Test policies.
+2. Test policies.
 Please modify the test arguments in the begining of test.py.
-
 ```python test.py ```
-Plot training curve.
+3. Plot training curve.
 ```python plot.py ```
