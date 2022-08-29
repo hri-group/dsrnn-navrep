@@ -17,7 +17,7 @@ pip install -e .
 5. Install [Python-RVO2 library](https://github.com/sybrenstuvel/Python-RVO2)
 
 ## Getting started
-This repository is organized in three parts:
+This repository is organized in different parts:
 
 - `crowd_sim/` folder contains the simulation environment.
 
